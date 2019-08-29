@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\pagestyle{fancy}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage{fontspec}
+\geometry{a4paper, scale=0.75}
+\lhead{Yangzhe Xie}
+\chead{SWEN90006: Assignment 1}
+\rhead{1029787}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headwidth}{\textwidth}
+\definecolor{keywordcolor}{rgb}{0.8,0.1,0.5}
+\definecolor{webgreen}{rgb}{0,.5,0}
+\definecolor{bgcolor}{rgb}{0.92,0.92,0.92}
+\lstset{language=[AspectJ]Java,
+    %backgroundcolor=\color{bgcolor}, 设置背景色
+    basicstyle=\small,
+    commentstyle=\color{blue} \textit, 
+    showstringspaces=false,
+    captionpos=b,
+    xleftmargin=2em,
+    xrightmargin=2em, 
+    aboveskip=1em
+    %numbers=left,
+    %numberstyle=\small
+}
+
+\title{SWEN90006: Assignment 1}
+\author{Name: Yangzhe Xie\\Student number: 1029787\\Email: yangzhe.xie@student.unimelb.edu.au}
+
+\date{\today}
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Task 1}
+\subsection{Test template trees}
+Figure 1 - 4 shows the test template trees for the API addUser, loginUser, updateDetails, and retrieveDetails respectively.
+\begin{figure}[hbt!]        
+\center{\includegraphics[width=15cm]  {addUser.png}}        
+\caption{\label{1} Test template tree for addUser()}      
+\end{figure}
+\begin{figure}[hbt!]        
+\center{\includegraphics[width=16cm]  {loginUser.png}}        
+\caption{\label{1} Test template tree for loginUser()}      
+\end{figure}
+\begin{figure}[hbt!]        
+\center{\includegraphics[width=15cm]  {updateDetails.png}}        
+\caption{\label{1} Test template tree for updateDetails()}      
+\end{figure}
+\begin{figure}[t!]        
+\center{\includegraphics[width=16cm]  {retrieveDetails.png}}        
+\caption{\label{1} Test template tree for retrieveDetails()}      
+\end{figure}
+
+\subsection{Do your set of equivalence classes cover the input space?}
+My set of equivalence classes cover the input space. The reasons are as follows:
+\enddocument
