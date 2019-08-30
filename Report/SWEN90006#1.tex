@@ -4,6 +4,7 @@
 \pagestyle{fancy}
 \usepackage{geometry}
 \usepackage{listings}
+\usepackage{longtable}
 \usepackage{enumitem}
 \usepackage{color}
 \usepackage{fontspec}
@@ -42,19 +43,19 @@
 \subsection{Test template trees}
 Figure 1 - 4 shows the test template trees for the API addUser, loginUser, updateDetails, and retrieveDetails respectively.
 \begin{figure}[hbt!]        
-\center{\includegraphics[width=15cm]  {addUser.png}}        
+\center{\includegraphics[width=16cm]  {addUserNew.png}}        
 \caption{\label{1} Test template tree for addUser()}      
 \end{figure}
 \begin{figure}[hbt!]        
-\center{\includegraphics[width=16cm]  {loginUser.png}}        
+\center{\includegraphics[width=15cm]  {loginUserNew.png}}        
 \caption{\label{1} Test template tree for loginUser()}      
 \end{figure}
 \begin{figure}[hbt!]        
-\center{\includegraphics[width=15cm]  {updateDetails.png}}        
+\center{\includegraphics[width=11cm]  {updateDetailsNew.png}}        
 \caption{\label{1} Test template tree for updateDetails()}      
 \end{figure}
 \begin{figure}[t!]        
-\center{\includegraphics[width=16cm]  {retrieveDetails.png}}        
+\center{\includegraphics[width=12cm]  {retrieveDetailsNew.png}}        
 \caption{\label{1} Test template tree for retrieveDetails()}      
 \end{figure}
 
@@ -68,4 +69,32 @@ If two variables are independent of each other, then the subtree of one variable
 \item [4)]
 As part of your input domain, the instance variables should also be considered. Note that all of these variables are collections, so according to guideline 4, we should follow the zero-one-many rule. But in this particular case, we just care about whether the collection contains some values. So I combined the two cases (number of elements equals 1 and greater than 1) into one (greater than 0), which does not affect the results of the tests.
 \end{itemize}
+
+\section{Test cases associated with equivalence classes}
+\subsection{addUser}
+
+\begin{longtable}{|p{2cm}|p{6cm}|p{6cm}|}
+\caption{Test cases for addUser}\\
+\hline 
+ID&Test case&Expected output\\
+\hline  
+EC1&paraphrases = {}, passbookUsername = "abc", paraphrase = "12345aA"&WeakPassphraseException\\
+\hline
+EC2&paraphrases = {}, passbookUsername = "abc", paraphrase = "1234567A"&WeakPassphraseException\\
+\hline
+EC3&paraphrases = {}, passbookUsername = "abc", paraphrase = "1234567a"&WeakPassphraseException\\
+\hline
+EC4&paraphrases = {}, passbookUsername = "abc", paraphrase = "123456aA"&-\\
+\hline
+EC5&paraphrases = {}, passbookUsername = "abc", paraphrase = "abcdABCD"&WeakPassphraseException\\
+\hline
+EC6&paraphrases = {"abcd":"123456aA"}, passbookUsername = "abcd", paraphrase = "123456aA"&DuplicateUserException\\
+\hline
+EC7&paraphrases = {"abcd":"123456aA"}, passbookUsername = "abc", paraphrase = "123456aA"&-\\
+\hline
+\end{longtable}
+
+\subsection{loginUser}
+\subsection{updateDetails}
+\subsection{retrieveDetails}
 \enddocument
