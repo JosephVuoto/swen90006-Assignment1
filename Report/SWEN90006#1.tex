@@ -43,7 +43,7 @@
 \subsection{Test template trees}
 Figure 1 - 4 shows the test template trees for the API addUser, loginUser, updateDetails, and retrieveDetails respectively.
 \begin{figure}[hbt!]        
-\center{\includegraphics[width=16cm]  {addUserNew.png}}        
+\center{\includegraphics[width=17cm]  {addUserNew.png}}        
 \caption{\label{1} Test template tree for addUser()}      
 \end{figure}
 \begin{figure}[hbt!]        
@@ -73,28 +73,160 @@ As part of your input domain, the instance variables should also be considered. 
 \section{Test cases associated with equivalence classes}
 \subsection{addUser}
 
-\begin{longtable}{|p{2cm}|p{6cm}|p{6cm}|}
+\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
 \caption{Test cases for addUser}\\
 \hline 
 ID&Test case&Expected output\\
 \hline  
-EC1&paraphrases = {}, passbookUsername = "abc", paraphrase = "12345aA"&WeakPassphraseException\\
+EC1&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "12345aA"&WeakPassphraseException\\
 \hline
-EC2&paraphrases = {}, passbookUsername = "abc", paraphrase = "1234567A"&WeakPassphraseException\\
+EC2&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "1234567A"&WeakPassphraseException\\
 \hline
-EC3&paraphrases = {}, passbookUsername = "abc", paraphrase = "1234567a"&WeakPassphraseException\\
+EC3&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "1234567a"&WeakPassphraseException\\
 \hline
-EC4&paraphrases = {}, passbookUsername = "abc", paraphrase = "123456aA"&-\\
+EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456aA"&-\\
 \hline
-EC5&paraphrases = {}, passbookUsername = "abc", paraphrase = "abcdABCD"&WeakPassphraseException\\
+EC5&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABCD"&WeakPassphraseException\\
 \hline
-EC6&paraphrases = {"abcd":"123456aA"}, passbookUsername = "abcd", paraphrase = "123456aA"&DuplicateUserException\\
+EC6&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abcd", paraphrase = "123456aA"&DuplicateUserException\\
 \hline
-EC7&paraphrases = {"abcd":"123456aA"}, passbookUsername = "abc", paraphrase = "123456aA"&-\\
+EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = "123456aA"&-\\
 \hline
 \end{longtable}
 
 \subsection{loginUser}
+
+\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
+\caption{Test cases for loginUser}\\
+\hline 
+ID&Test case&Expected output\\
+\hline  
+EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "abc", paraphrase = "123456aA"&NoSuchUserException\\
+\hline
+EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&IncorrectPassphraseException\\
+\hline
+EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+\hline
+EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{123:"def"\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+\hline
+EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+\hline
+EC6&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&AlreadyLoggedInException\\
+\hline
+EC7&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&NoSuchUserException\\
+\hline
+\end{longtable}
+
+
 \subsection{updateDetails}
+\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
+\caption{Test cases for updateUserDetails}\\
+\hline 
+ID&Test case&Expected output\\
+\hline  
+EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&InvalidSessionIDException\\
+\hline
+EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUsername = "123", urlPassword = "123"&InvalidSessionIDException\\
+\hline
+EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&-\\
+\hline
+EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = "123"&-\\
+\hline
+EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = null&-\\
+\hline
+EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = "123"&-\\
+\hline
+EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&MalformedURLException\\
+\hline
+\end{longtable}
 \subsection{retrieveDetails}
+
+%---------------------------------------------------------------------------------------
+\section{Boundary-value analysis}
+\subsection{addUser}
+
+\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
+\caption{Test cases for addUser}\\
+\hline 
+EC&Test case&Remark\\
+\hline  
+EC1&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "12345aA"&off point for paraphrase.length() < 8\\
+\hline
+EC2&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456`A"&off point for S[i] not in ‘a’ - ‘z’, for every 0 <= i <= length[paraphrase]-1\\
+\hline
+EC2&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456\{A"&off point for S[i] not  in ‘a’ - ‘z’, for every 0 <= i <= length[paraphrase]-1\\
+\hline
+EC3&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456@a"&off point for S[i] not in ‘A’ - ‘Z’, for every 0 <= i <= length[paraphrase]-1\\
+\hline
+EC3&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456[a"&off point for S[i] not  in ‘A’ - ‘Z’, for every 0 <= i <= length[paraphrase]-1\\
+\hline
+EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567nA"&on point for S[i] in ‘A’ - ‘Z’, for some 0 <= i <= length[paraphrase]-1\\
+\hline
+EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567nZ"&on point for S[i] in ‘A’ - ‘Z’, for some 0 <= i <= length[paraphrase]-1\\
+\hline
+EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567Na"&on point for S[i] in ‘a’ - ‘z’, for some 0 <= i <= length[paraphrase]-1\\
+\hline
+EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567Nz"&on point for S[i] in ‘a’ - ‘z’, for some 0 <= i <= length[paraphrase]-1\\
+\hline
+EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC0"&on point for S[i] in ‘0’ - ‘9’, for some 0 <= i <= length[paraphrase]-1\\
+\hline
+EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC9"&on point for S[i] in ‘0’ - ‘9’, for some 0 <= i <= length[paraphrase]-1\\
+\hline
+EC5&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC/"&off point for S[i] not in ‘0’ - ‘9’, for every 0 <= i <= length[paraphrase]-1\\
+\hline
+EC5&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC:"&off point for S[i] not in ‘0’ - ‘9’, for every 0 <= i <= length[paraphrase]-1\\
+\hline
+EC6&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername in passphrases.keys()\\
+\hline
+EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername not in passphrases.keys()\\
+\hline
+\end{longtable}
+
+\subsection{loginUser}
+
+\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
+\caption{Test cases for loginUser}\\
+\hline 
+ID&Test case&Expected output\\
+\hline  
+EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "abc", paraphrase = "123456aA"&NoSuchUserException\\
+\hline
+EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&IncorrectPassphraseException\\
+\hline
+EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+\hline
+EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{123:"def"\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+\hline
+EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+\hline
+EC6&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&AlreadyLoggedInException\\
+\hline
+EC7&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&NoSuchUserException\\
+\hline
+\end{longtable}
+
+
+\subsection{updateDetails}
+\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
+\caption{Test cases for updateUserDetails}\\
+\hline 
+ID&Test case&Expected output\\
+\hline  
+EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&InvalidSessionIDException\\
+\hline
+EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUsername = "123", urlPassword = "123"&InvalidSessionIDException\\
+\hline
+EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&-\\
+\hline
+EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = "123"&-\\
+\hline
+EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = null&-\\
+\hline
+EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = "123"&-\\
+\hline
+EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&MalformedURLException\\
+\hline
+\end{longtable}
+\subsection{retrieveDetails}
+
 \enddocument
