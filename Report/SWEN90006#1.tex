@@ -117,7 +117,6 @@ EC7&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbo
 \hline
 \end{longtable}
 
-
 \subsection{updateDetails}
 \begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
 \caption{Test cases for updateUserDetails}\\
@@ -142,7 +141,26 @@ EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsernam
 \hline
 \end{longtable}
 \subsection{retrieveDetails}
-%TODO
+\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
+\caption{Test cases for updateUserDetails}\\
+\hline 
+ID&Test case&Expected output\\
+\hline  
+EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&InvalidSessionIDException\\
+\hline
+EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&InvalidSessionIDException\\
+\hline
+EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&-\\
+\hline
+EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{\}\}&NoSuchURLException\\
+\hline
+EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{"https://test.com":\{"aaa":"aaa"\}\}\}&-\\
+\hline
+EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://java.com":\{"aaa":"aaa"\}\}\}&NoSuchURLException\\
+\hline
+EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&MalformedURLException\\
+\hline
+\end{longtable}
 
 %---------------------------------------------------------------------------------------
 \section{Boundary-value analysis}
@@ -153,7 +171,7 @@ EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsernam
 \hline 
 Test ID&EC&Test case&Boundary\\
 \hline  
-1&EC1&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "12345aA"&off point for paraphrase.length() < 8\\
+1&EC1&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "12345aA"&off point for paraphrase.length() < 8 and on point for paraphrases.size() == 0\\
 \hline
 2&EC2&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456`A"&off point for S[i] not in ‘a’ - ‘z’, for every 0 <= i <= length[paraphrase]-1\\
 \hline
@@ -179,7 +197,7 @@ Test ID&EC&Test case&Boundary\\
 \hline
 13&EC5&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC:"&off point for S[i] not in ‘0’ - ‘9’, for every 0 <= i <= length[paraphrase]-1\\
 \hline
-14&EC6&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername in passphrases.keys()\\
+14&EC6&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername in passphrases.keys() and off point for paraphrases.size() > 0\\
 \hline
 15&EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername not in passphrases.keys()\\
 \hline
@@ -229,11 +247,31 @@ Test ID&EC&Test case&Boundary\\
 \hline
 7&EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = "123"&on point for urlUsername != null and urlPassword != null\\
 \hline
-8&EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&off point for url.getProtocol() equals other\\
+8&EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&on point for url.getProtocol() equals other\\
 \hline
 \end{longtable}
 \subsection{retrieveDetails}
-%TODO
+\begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
+\caption{Test cases for updateUserDetails}\\
+\hline 
+Test ID&EC&Test case&Boundary\\
+\hline  
+1&EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&on point for userIDs.size() == 0\\
+\hline
+2&EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&off point for userIDs.size() > 0 and on point for sessionID not in userIDs.keys()\\
+\hline
+3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}& on point for url.getProtocol() equals "http" and sessionID in userIDs.keys()\\
+\hline
+4&EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{\}\}&on point for details.get(passbookUsername).size() == 0 and url.getProtocol() equals "https"\\
+\hline
+5&EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{"https://test.com":\{"aaa":"aaa"\}\}\}&on point for url in details.get(passbookUsername).keys and off point for details.get(passbookUsername).size() > 0\\
+\hline
+6&EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://java.com":\{"aaa":"aaa"\}\}\}&on point for url not in details.get(passbookUsername).keys\\
+\hline
+7&EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&on point for url.getProtocol() equals other\\
+\hline
+\end{longtable}
+
 
 
 %---------------------------------------------------------------------------------------
