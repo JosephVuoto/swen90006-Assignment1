@@ -130,13 +130,15 @@ EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUserna
 \hline
 EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&-\\
 \hline
-EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = "123"&-\\
+EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = null&-\\
 \hline
-EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = null&-\\
+EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = "123"&-\\
 \hline
-EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = "123"&-\\
+EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = null&-\\
 \hline
-EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&MalformedURLException\\
+EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = "123"&-\\
+\hline
+EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&MalformedURLException\\
 \hline
 \end{longtable}
 \subsection{retrieveDetails}
@@ -183,7 +185,56 @@ Test ID&EC&Test case&Boundary\\
 \hline
 \end{longtable}
 
+\subsection{loginUser}
+
+\begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
+\caption{Test cases for loginUser}\\
+\hline 
+Test ID&EC&Test case&Boundary\\
+\hline  
+1&EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "abc", paraphrase = "123456aA"&on point for paraphrases.size() == 0\\
+\hline
+2&EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&on point for passphrases.get (passbookUsername)
+not euqals passphrase\\
+\hline
+3&EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for userIDs.size()== 0\\
+\hline
+4&EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{123:"def"\} passbookUsername = "abc", paraphrase = "123456aA"&off point for userIDs.size() > 0 and paraphrases.size() > 0\\
+\hline
+5&EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername not in sessionIDs.keys() and off point for sessionIDs.size() > 0\\
+\hline
+6&EC6&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername in sessionIDs.keys()\\
+\hline
+7&EC7&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername not in passphrases.keys()\\
+\hline
+\end{longtable}
+
+\subsection{updateDetails}
+\begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
+\caption{Test cases for updateUserDetails}\\
+\hline 
+Test ID&EC&Test case&Boundary\\
+\hline  
+1&EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&on point for userIDs.size() == 0\\
+\hline
+2&EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUsername = "123", urlPassword = "123"&on point for sessionID not in userIDs.keys() and off point for userIDs.size() > 0\\
+\hline
+3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&on point for url.getProtocol() equals "http"\\
+\hline
+4&EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = null&on point for urlUsername == null and urlPassword == null and url.getProtocol() equals "https"\\
+\hline
+5&EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = "123"&on point for urlUsername == null and urlPassword != null\\
+\hline
+6&EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = null&on point for urlUsername != null and urlPassword == null\\
+\hline
+7&EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = "123"&on point for urlUsername != null and urlPassword != null\\
+\hline
+8&EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&off point for url.getProtocol() equals other\\
+\hline
+\end{longtable}
 \subsection{retrieveDetails}
+%TODO
+
 
 %---------------------------------------------------------------------------------------
 \section{Multiple-conditions coverage}
