@@ -277,6 +277,7 @@ Test ID&EC&Test case&Boundary\\
 %---------------------------------------------------------------------------------------
 \section{Multiple-conditions coverage}
 \subsection{addUser}
+Table 9 shows all test objectives for the API addUser
 \begin{longtable}{|p{2cm}|p{10cm}|p{3cm}|}
 \caption{Multiple-conditions for addUser}\\
 \hline 
@@ -335,8 +336,11 @@ Test Objective ID&Condition&Output(s)\\
 26&!containsLowerCase || !containsUpperCase || !containsNumber&true true true\\
 \hline
 \end{longtable}
+\subsubsection{partitioning score for the API addUser}
+\subsubsection{boundary score for the API addUser}
 
 \subsection{loginUser}
+Table 10 shows all test objectives for the API loginUser
 \begin{longtable}{|p{2cm}|p{10cm}|p{3cm}|}
 \caption{Multiple-conditions for loginUser}\\
 \hline 
@@ -359,8 +363,11 @@ Test Objective ID&Condition&Output(s)\\
 8&userIDs.containsKey(sessionID)&false\\
 \hline
 \end{longtable}
+\subsubsection{partitioning score for the API loginUser}
+\subsubsection{boundary score for the API loginUser}
 
 \subsection{updateDetails}
+Table 11 shows all test objectives for the API updateDetails
 \begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
 \caption{Multiple-conditions for updateDetails}\\
 \hline 
@@ -383,8 +390,11 @@ Test Objective ID&Condition&Output(s)\\
 8&urlUsername == null || urlPassword == null&true true\\
 \hline
 \end{longtable}
+\subsubsection{partitioning score for the API updateDetails}
+\subsubsection{boundary score for the API updateDetails}
 
 \subsection{retrieveDetails}
+Table 12 shows all test objectives for the API retrieveDetails
 \begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
 \caption{Multiple-conditions for retrieveDetails}\\
 \hline 
@@ -407,5 +417,7 @@ Test Objective ID&Condition&Output(s)\\
 8&pair == null&true\\
 \hline
 \end{longtable}
+\subsubsection{partitioning score for the API retrieveDetails}
+\subsubsection{boundary score for the API retrieveDetails}
 
 \enddocument
