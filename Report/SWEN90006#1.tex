@@ -182,51 +182,140 @@ EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = 
 \hline
 \end{longtable}
 
-\subsection{loginUser}
+\subsection{retrieveDetails}
 
-\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for loginUser}\\
+%---------------------------------------------------------------------------------------
+\section{Multiple-conditions coverage}
+\subsection{addUser}
+\begin{longtable}{|p{2cm}|p{10cm}|p{3cm}|}
+\caption{Multiple-conditions for addUser}\\
 \hline 
-ID&Test case&Expected output\\
+Test Objective ID&Condition&Output(s)\\
 \hline  
-EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "abc", paraphrase = "123456aA"&NoSuchUserException\\
+1&passphrases.containsKey(passbookUsername)&true\\
 \hline
-EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&IncorrectPassphraseException\\
+2&passphrases.containsKey(passbookUsername)&false\\
 \hline
-EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+3&passphrase.length() \textless MINIMUM\_PASSPHRASE\_LENGTH&true\\
 \hline
-EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{123:"def"\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+4&passphrase.length() \textless MINIMUM\_PASSPHRASE\_LENGTH&false\\
 \hline
-EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+5&i < passphrase.length()&true\\
 \hline
-EC6&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&AlreadyLoggedInException\\
+6&i < passphrase.length()&false\\
 \hline
-EC7&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&NoSuchUserException\\
+7&'a' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= 'z'&false false\\
+\hline
+8&'a' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= 'z'&true false\\
+\hline
+9&'a' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= 'z'&false true\\
+\hline
+10&'a' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= 'z'&true true\\
+\hline
+11&'A' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= 'Z'&false false\\
+\hline
+12&'A' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= 'Z'&true false\\
+\hline
+13&'A' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= 'Z'&false true\\
+\hline
+14&'A' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= 'Z'&true true\\
+\hline
+15&'0' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= '9'&false false\\
+\hline
+16&'0' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= '9'&true false\\
+\hline
+17&'0' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= '9'&false true\\
+\hline
+18&'0' <= passphrase.charAt(i) \&\& passphrase.charAt(i) <= '9'&true true\\
+\hline
+19&!containsLowerCase || !containsUpperCase || !containsNumber&false false false\\
+\hline
+20&!containsLowerCase || !containsUpperCase || !containsNumber&false false true\\
+\hline
+21&!containsLowerCase || !containsUpperCase || !containsNumber&false true false\\
+\hline
+22&!containsLowerCase || !containsUpperCase || !containsNumber&false true true\\
+\hline
+23&!containsLowerCase || !containsUpperCase || !containsNumber&true false false\\
+\hline
+24&!containsLowerCase || !containsUpperCase || !containsNumber&true false true\\
+\hline
+25&!containsLowerCase || !containsUpperCase || !containsNumber&true true false\\
+\hline
+26&!containsLowerCase || !containsUpperCase || !containsNumber&true true true\\
 \hline
 \end{longtable}
 
+\subsection{loginUser}
+\begin{longtable}{|p{2cm}|p{10cm}|p{3cm}|}
+\caption{Multiple-conditions for loginUser}\\
+\hline 
+Test Objective ID&Condition&Output(s)\\
+\hline  
+1&!passphrases.containsKey(passbookUsername)&true\\
+\hline
+2&!passphrases.containsKey(passbookUsername)&false\\
+\hline
+3&sessionIDs.get(passbookUsername) != null&true\\
+\hline
+4&sessionIDs.get(passbookUsername) != null&false\\
+\hline
+5&!passphrases.get(passbookUsername).equals(passphrase)&true\\
+\hline
+6&!passphrases.get(passbookUsername).equals(passphrase)&false\\
+\hline
+7&userIDs.containsKey(sessionID)&true\\
+\hline
+8&userIDs.containsKey(sessionID)&false\\
+\hline
+\end{longtable}
 
 \subsection{updateDetails}
-\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for updateUserDetails}\\
+\begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
+\caption{Multiple-conditions for updateDetails}\\
 \hline 
-ID&Test case&Expected output\\
+Test Objective ID&Condition&Output(s)\\
 \hline  
-EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&InvalidSessionIDException\\
+1&passbookUsername == null&true\\
 \hline
-EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUsername = "123", urlPassword = "123"&InvalidSessionIDException\\
+2&passbookUsername == null&false\\
 \hline
-EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&-\\
+3&!Arrays.asList(VALID\_URL\_PROTOCOLS).contains(url.getProtocol())&true\\
 \hline
-EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = "123"&-\\
+4&!Arrays.asList(VALID\_URL\_PROTOCOLS).contains(url.getProtocol())&false\\
 \hline
-EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = null&-\\
+5&urlUsername == null || urlPassword == null&false false\\
 \hline
-EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = "123"&-\\
+6&urlUsername == null || urlPassword == null&false true\\
 \hline
-EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&MalformedURLException\\
+7&urlUsername == null || urlPassword == null&true false\\
+\hline
+8&urlUsername == null || urlPassword == null&true true\\
 \hline
 \end{longtable}
+
 \subsection{retrieveDetails}
+\begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
+\caption{Multiple-conditions for retrieveDetails}\\
+\hline 
+Test Objective ID&Condition&Output(s)\\
+\hline  
+1&passbookUsername == null&true\\
+\hline
+2&passbookUsername == null&false\\
+\hline
+3&!Arrays.asList(VALID\_URL\_PROTOCOLS).contains(url.getProtocol())&true\\
+\hline
+4&!Arrays.asList(VALID\_URL\_PROTOCOLS).contains(url.getProtocol())&false\\
+\hline
+5&pt == null&false\\
+\hline
+6&pt == null&true\\
+\hline
+7&pair == null&false\\
+\hline
+8&pair == null&true\\
+\hline
+\end{longtable}
 
 \enddocument
