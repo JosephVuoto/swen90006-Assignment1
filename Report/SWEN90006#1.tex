@@ -140,45 +140,46 @@ EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsernam
 \hline
 \end{longtable}
 \subsection{retrieveDetails}
+%TODO
 
 %---------------------------------------------------------------------------------------
 \section{Boundary-value analysis}
 \subsection{addUser}
 
-\begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
+\begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
 \caption{Test cases for addUser}\\
 \hline 
-EC&Test case&Remark\\
+Test ID&EC&Test case&Boundary\\
 \hline  
-EC1&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "12345aA"&off point for paraphrase.length() < 8\\
+1&EC1&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "12345aA"&off point for paraphrase.length() < 8\\
 \hline
-EC2&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456`A"&off point for S[i] not in ‘a’ - ‘z’, for every 0 <= i <= length[paraphrase]-1\\
+2&EC2&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456`A"&off point for S[i] not in ‘a’ - ‘z’, for every 0 <= i <= length[paraphrase]-1\\
 \hline
-EC2&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456\{A"&off point for S[i] not  in ‘a’ - ‘z’, for every 0 <= i <= length[paraphrase]-1\\
+3&EC2&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456\{A"&off point for S[i] not  in ‘a’ - ‘z’, for every 0 <= i <= length[paraphrase]-1\\
 \hline
-EC3&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456@a"&off point for S[i] not in ‘A’ - ‘Z’, for every 0 <= i <= length[paraphrase]-1\\
+4&EC3&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456@a"&off point for S[i] not in ‘A’ - ‘Z’, for every 0 <= i <= length[paraphrase]-1\\
 \hline
-EC3&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456[a"&off point for S[i] not  in ‘A’ - ‘Z’, for every 0 <= i <= length[paraphrase]-1\\
+5&EC3&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "123456[a"&off point for S[i] not  in ‘A’ - ‘Z’, for every 0 <= i <= length[paraphrase]-1\\
 \hline
-EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567nA"&on point for S[i] in ‘A’ - ‘Z’, for some 0 <= i <= length[paraphrase]-1\\
+6&EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567nA"&on point for S[i] in ‘A’ - ‘Z’, for some 0 <= i <= length[paraphrase]-1\\
 \hline
-EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567nZ"&on point for S[i] in ‘A’ - ‘Z’, for some 0 <= i <= length[paraphrase]-1\\
+7&EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567nZ"&on point for S[i] in ‘A’ - ‘Z’, for some 0 <= i <= length[paraphrase]-1\\
 \hline
-EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567Na"&on point for S[i] in ‘a’ - ‘z’, for some 0 <= i <= length[paraphrase]-1\\
+8&EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567Na"&on point for S[i] in ‘a’ - ‘z’, for some 0 <= i <= length[paraphrase]-1\\
 \hline
-EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567Nz"&on point for S[i] in ‘a’ - ‘z’, for some 0 <= i <= length[paraphrase]-1\\
+9&EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "234567Nz"&on point for S[i] in ‘a’ - ‘z’, for some 0 <= i <= length[paraphrase]-1\\
 \hline
-EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC0"&on point for S[i] in ‘0’ - ‘9’, for some 0 <= i <= length[paraphrase]-1\\
+10&EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC0"&on point for S[i] in ‘0’ - ‘9’, for some 0 <= i <= length[paraphrase]-1\\
 \hline
-EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC9"&on point for S[i] in ‘0’ - ‘9’, for some 0 <= i <= length[paraphrase]-1\\
+11&EC4&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC9"&on point for S[i] in ‘0’ - ‘9’, for some 0 <= i <= length[paraphrase]-1\\
 \hline
-EC5&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC/"&off point for S[i] not in ‘0’ - ‘9’, for every 0 <= i <= length[paraphrase]-1\\
+12&EC5&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC/"&off point for S[i] not in ‘0’ - ‘9’, for every 0 <= i <= length[paraphrase]-1\\
 \hline
-EC5&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC:"&off point for S[i] not in ‘0’ - ‘9’, for every 0 <= i <= length[paraphrase]-1\\
+13&EC5&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "abcdABC:"&off point for S[i] not in ‘0’ - ‘9’, for every 0 <= i <= length[paraphrase]-1\\
 \hline
-EC6&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername in passphrases.keys()\\
+14&EC6&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername in passphrases.keys()\\
 \hline
-EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername not in passphrases.keys()\\
+15&EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername not in passphrases.keys()\\
 \hline
 \end{longtable}
 
