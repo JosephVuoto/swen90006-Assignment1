@@ -101,7 +101,7 @@ EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = 
 \hline 
 ID&Test case&Expected output\\
 \hline  
-EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "abc", paraphrase = "123456aA"&NoSuchUserException\\
+EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "abc", paraphrase = "1aA"&NoSuchUserException\\
 \hline
 EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&IncorrectPassphraseException\\
 \hline
@@ -337,7 +337,63 @@ Test Objective ID&Condition&Output(s)\\
 \hline
 \end{longtable}
 \subsubsection{partitioning score for the API addUser}
+\begin{longtable}{|p{2cm}|p{8cm}|}
+\caption{Multiple-conditions tested of partitioning}\\
+\hline 
+Test Case& CoverTest Objective ID\\
+\hline  
+1&2 3\\
+\hline
+2&2 4 5 6 7 9 11 13 14 15 16 18 23\\
+\hline
+3&2 4 5 6 7 9 10 11 12 13 15 16 18 21\\
+\hline
+4&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
+\hline
+5&2 4 5 6 7 9 10 11 12 14 15 16 20\\
+\hline
+6&1\\
+\hline
+7&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
+\hline
+\end{longtable}
 \subsubsection{boundary score for the API addUser}
+\begin{longtable}{|p{2cm}|p{8cm}|}
+\caption{Multiple-conditions tested of boundary}\\
+\hline 
+Test Case& CoverTest Objective ID\\
+\hline  
+1&2 3\\
+\hline
+2&2 4 5 6 7 9 11 13 14 15 16 18 23\\
+\hline
+3&2 4 5 6 7 8 9 11 13 14 15 16 18 23\\
+\hline
+4&2 4 5 6 7 9 10 11 12 13 15 16 18 21\\
+\hline
+5&2 4 5 6 7 9 10 11 12 13 15 16 18 21\\
+\hline
+6&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
+\hline
+7&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
+\hline
+8&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
+\hline
+9&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
+\hline
+10&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
+\hline
+11&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
+\hline
+12&2 4 5 6 7 9 10 11 12 14 15 16 20\\
+\hline
+13&2 4 5 6 7 9 10 11 12 14 15 16 17 20\\
+\hline
+14&1\\
+\hline
+15&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
+\hline
+\end{longtable}
 
 \subsection{loginUser}
 Table 10 shows all test objectives for the API loginUser
@@ -364,6 +420,7 @@ Test Objective ID&Condition&Output(s)\\
 \hline
 \end{longtable}
 \subsubsection{partitioning score for the API loginUser}
+
 \subsubsection{boundary score for the API loginUser}
 
 \subsection{updateDetails}
