@@ -414,15 +414,53 @@ Test Objective ID&Condition&Output(s)\\
 \hline
 6&!passphrases.get(passbookUsername).equals(passphrase)&false\\
 \hline
-7&userIDs.containsKey(sessionID)&true\\
+7&userIDs.containsKey(sessionID)&untestable\\
 \hline
-8&userIDs.containsKey(sessionID)&false\\
+8&userIDs.containsKey(sessionID)&untestable\\
 \hline
 \end{longtable}
 \subsubsection{partitioning score for the API loginUser}
-
+\begin{longtable}{|p{2cm}|p{8cm}|}
+\caption{Multiple-conditions tested of partitioning}\\
+\hline 
+Test Case& CoverTest Objective ID\\
+\hline  
+1&1\\
+\hline
+2&2 4 5\\
+\hline
+3&2 4 6 8\\
+\hline
+4&2 4 6 7 8\\
+\hline
+5&2 4 6 8\\
+\hline
+6&2 3\\
+\hline
+7&1\\
+\hline
+\end{longtable}
 \subsubsection{boundary score for the API loginUser}
-
+\begin{longtable}{|p{2cm}|p{8cm}|}
+\caption{Multiple-conditions tested of boundary}\\
+\hline 
+Test Case& CoverTest Objective ID\\
+\hline  
+1&1\\
+\hline
+2&2 4 5\\
+\hline
+3&2 4 6 8\\
+\hline
+4&2 4 6 7 8\\
+\hline
+5&2 4 6 8\\
+\hline
+6&2 3\\
+\hline
+7&1\\
+\hline
+\end{longtable}
 \subsection{updateDetails}
 Table 11 shows all test objectives for the API updateDetails
 \begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
@@ -448,8 +486,47 @@ Test Objective ID&Condition&Output(s)\\
 \hline
 \end{longtable}
 \subsubsection{partitioning score for the API updateDetails}
+\begin{longtable}{|p{2cm}|p{8cm}|}
+\caption{Multiple-conditions tested of partitioning}\\
+\hline 
+Test Case& CoverTest Objective ID\\
+\hline  
+1&1\\
+\hline
+2&1\\
+\hline
+3&2 4 5\\
+\hline
+4&2 4 8\\
+\hline
+5&2 4 7\\
+\hline
+6&2 4 6\\
+\hline
+7&2 4 5\\
+\hline
+\end{longtable}
 \subsubsection{boundary score for the API updateDetails}
-
+\begin{longtable}{|p{2cm}|p{8cm}|}
+\caption{Multiple-conditions tested of boundary}\\
+\hline 
+Test Case& CoverTest Objective ID\\
+\hline  
+1&1\\
+\hline
+2&1\\
+\hline
+3&2 4 5\\
+\hline
+4&2 4 8\\
+\hline
+5&2 4 7\\
+\hline
+6&2 4 6\\
+\hline
+7&2 4 5\\
+\hline
+\end{longtable}
 \subsection{retrieveDetails}
 Table 12 shows all test objectives for the API retrieveDetails
 \begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
@@ -475,6 +552,45 @@ Test Objective ID&Condition&Output(s)\\
 \hline
 \end{longtable}
 \subsubsection{partitioning score for the API retrieveDetails}
+\begin{longtable}{|p{2cm}|p{8cm}|}
+\caption{Multiple-conditions tested of partitioning}\\
+\hline 
+Test Case& CoverTest Objective ID\\
+\hline  
+1&1\\
+\hline
+2&1\\
+\hline
+3&2 4 5 7\\
+\hline
+4&2 4 5 8\\
+\hline
+5&2 4 5 7\\
+\hline
+6&2 4 5 8\\
+\hline
+7&2 3\\
+\hline
+\end{longtable}
 \subsubsection{boundary score for the API retrieveDetails}
-
+\begin{longtable}{|p{2cm}|p{8cm}|}
+\caption{Multiple-conditions tested of boundary}\\
+\hline 
+Test Case& CoverTest Objective ID\\
+\hline  
+1&1\\
+\hline
+2&1\\
+\hline
+3&2 4 5 7\\
+\hline
+4&2 4 5 8\\
+\hline
+5&2 4 5 7\\
+\hline
+6&2 4 5 8\\
+\hline
+7&2 3\\
+\hline
+\end{longtable}
 \enddocument
