@@ -47,11 +47,11 @@ Figure 1 - 4 shows the test template trees for the API addUser, loginUser, updat
 \caption{\label{1} Test template tree for addUser()}      
 \end{figure}
 \begin{figure}[hbt!]        
-\center{\includegraphics[width=15cm]  {loginUserNew.png}}        
+\center{\includegraphics[width=14cm]  {loginUserNew.png}}        
 \caption{\label{1} Test template tree for loginUser()}      
 \end{figure}
 \begin{figure}[hbt!]        
-\center{\includegraphics[width=11cm]  {updateDetailsNew.png}}        
+\center{\includegraphics[width=10cm]  {updateDetailsNew.png}}        
 \caption{\label{1} Test template tree for updateDetails()}      
 \end{figure}
 \begin{figure}[t!]        
@@ -78,7 +78,7 @@ As part of your input domain, the instance variables should also be considered. 
 \hline 
 ID&Test case&Expected output\\
 \hline  
-EC1&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "12345aA"&WeakPassphraseException\\
+EC1&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "1aA"&WeakPassphraseException\\
 \hline
 EC2&paraphrases = \{\}, passbookUsername = "abc", paraphrase = "1234567A"&WeakPassphraseException\\
 \hline
@@ -101,19 +101,15 @@ EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = 
 \hline 
 ID&Test case&Expected output\\
 \hline  
-EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "abc", paraphrase = "1aA"&NoSuchUserException\\
+EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "abc", paraphrase = "123456aA"&NoSuchUserException\\
 \hline
 EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&IncorrectPassphraseException\\
 \hline
-EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&-\\
+EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&-\\
 \hline
-EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{123:"def"\} passbookUsername = "abc", paraphrase = "123456aA"&-\\
+EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&AlreadyLoggedInException\\
 \hline
-EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&-\\
-\hline
-EC6&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&AlreadyLoggedInException\\
-\hline
-EC7&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&NoSuchUserException\\
+EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&NoSuchUserException\\
 \hline
 \end{longtable}
 
@@ -215,15 +211,11 @@ Test ID&EC&Test case&Boundary\\
 2&EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&on point for passphrases.get (passbookUsername)
 not euqals passphrase\\
 \hline
-3&EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for userIDs.size()== 0\\
+3&EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername not in sessionIDs.keys() and off point for sessionIDs.size() > 0\\
 \hline
-4&EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{123:"def"\} passbookUsername = "abc", paraphrase = "123456aA"&off point for userIDs.size() > 0 and paraphrases.size() > 0\\
+4&EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername in sessionIDs.keys()\\
 \hline
-5&EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername not in sessionIDs.keys() and off point for sessionIDs.size() > 0\\
-\hline
-6&EC6&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername in sessionIDs.keys()\\
-\hline
-7&EC7&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername not in passphrases.keys()\\
+5&EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername not in passphrases.keys()\\
 \hline
 \end{longtable}
 
@@ -414,9 +406,9 @@ Test Objective ID&Condition&Output(s)\\
 \hline
 6&!passphrases.get(passbookUsername).equals(passphrase)&false\\
 \hline
-7&userIDs.containsKey(sessionID)&untestable\\
+7&userIDs.containsKey(sessionID)&true\\
 \hline
-8&userIDs.containsKey(sessionID)&untestable\\
+8&userIDs.containsKey(sessionID)&false\\
 \hline
 \end{longtable}
 \subsubsection{partitioning score for the API loginUser}
@@ -431,13 +423,9 @@ Test Case& CoverTest Objective ID\\
 \hline
 3&2 4 6 8\\
 \hline
-4&2 4 6 7 8\\
+4&2 3\\
 \hline
-5&2 4 6 8\\
-\hline
-6&2 3\\
-\hline
-7&1\\
+5&1\\
 \hline
 \end{longtable}
 \subsubsection{boundary score for the API loginUser}
@@ -452,13 +440,9 @@ Test Case& CoverTest Objective ID\\
 \hline
 3&2 4 6 8\\
 \hline
-4&2 4 6 7 8\\
+4&2 3\\
 \hline
-5&2 4 6 8\\
-\hline
-6&2 3\\
-\hline
-7&1\\
+5&1\\
 \hline
 \end{longtable}
 \subsection{updateDetails}
@@ -505,6 +489,8 @@ Test Case& CoverTest Objective ID\\
 \hline
 7&2 4 5\\
 \hline
+8&2 3\\
+\hline
 \end{longtable}
 \subsubsection{boundary score for the API updateDetails}
 \begin{longtable}{|p{2cm}|p{8cm}|}
@@ -525,6 +511,8 @@ Test Case& CoverTest Objective ID\\
 6&2 4 6\\
 \hline
 7&2 4 5\\
+\hline
+8&2 3\\
 \hline
 \end{longtable}
 \subsection{retrieveDetails}
