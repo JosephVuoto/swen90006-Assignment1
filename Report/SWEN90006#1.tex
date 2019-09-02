@@ -119,11 +119,11 @@ EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbo
 \hline 
 ID&Test case&Expected output\\
 \hline  
-EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&InvalidSessionIDException\\
+EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "456"&InvalidSessionIDException\\
 \hline
-EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUsername = "123", urlPassword = "123"&InvalidSessionIDException\\
+EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUsername = "123", urlPassword = "456"&InvalidSessionIDException\\
 \hline
-EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&-\\
+EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "456"&-\\
 \hline
 EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = null&-\\
 \hline
@@ -142,19 +142,19 @@ EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsernam
 \hline 
 ID&Test case&Expected output\\
 \hline  
-EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&InvalidSessionIDException\\
+EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&InvalidSessionIDException\\
 \hline
-EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&InvalidSessionIDException\\
+EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&InvalidSessionIDException\\
 \hline
-EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&-\\
+EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&-\\
 \hline
 EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{\}\}&NoSuchURLException\\
 \hline
-EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{"https://test.com":\{"aaa":"aaa"\}\}\}&-\\
+EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{"https://test.com":\{"aaa":"bbb"\}\}\}&-\\
 \hline
-EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://java.com":\{"aaa":"aaa"\}\}\}&NoSuchURLException\\
+EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://java.com":\{"aaa":"bbb"\}\}\}&NoSuchURLException\\
 \hline
-EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&MalformedURLException\\
+EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&MalformedURLException\\
 \hline
 \end{longtable}
 
@@ -225,21 +225,21 @@ not euqals passphrase\\
 \hline 
 Test ID&EC&Test case&Boundary\\
 \hline  
-1&EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&on point for userIDs.size() == 0\\
+1&EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "456"&on point for userIDs.size() == 0\\
 \hline
-2&EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUsername = "123", urlPassword = "123"&on point for sessionID not in userIDs.keys() and off point for userIDs.size() > 0\\
+2&EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUsername = "123", urlPassword = "456"&on point for sessionID not in userIDs.keys() and off point for userIDs.size() > 0\\
 \hline
-3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "123"&on point for url.getProtocol() equals "http"\\
+3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "456"&on point for url.getProtocol() equals "http"\\
 \hline
 4&EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = null&on point for urlUsername == null and urlPassword == null and url.getProtocol() equals "https"\\
 \hline
-5&EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = "123"&on point for urlUsername == null and urlPassword != null\\
+5&EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = "456"&on point for urlUsername == null and urlPassword != null\\
 \hline
 6&EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = null&on point for urlUsername != null and urlPassword == null\\
 \hline
-7&EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = "123"&on point for urlUsername != null and urlPassword != null\\
+7&EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = "123", urlPassword = "456"&on point for urlUsername != null and urlPassword != null\\
 \hline
-8&EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&on point for url.getProtocol() equals other\\
+8&EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "456"&on point for url.getProtocol() equals other\\
 \hline
 \end{longtable}
 \subsection{retrieveDetails}
@@ -248,19 +248,19 @@ Test ID&EC&Test case&Boundary\\
 \hline 
 Test ID&EC&Test case&Boundary\\
 \hline  
-1&EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&on point for userIDs.size() == 0\\
+1&EC1&userIDs = \{\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&on point for userIDs.size() == 0\\
 \hline
-2&EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&off point for userIDs.size() > 0 and on point for sessionID not in userIDs.keys()\\
+2&EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&off point for userIDs.size() > 0 and on point for sessionID not in userIDs.keys()\\
 \hline
-3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}& on point for url.getProtocol() equals "http" and sessionID in userIDs.keys()\\
+3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}& on point for url.getProtocol() equals "http" and sessionID in userIDs.keys()\\
 \hline
 4&EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{\}\}&on point for details.get(passbookUsername).size() == 0 and url.getProtocol() equals "https"\\
 \hline
-5&EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{"https://test.com":\{"aaa":"aaa"\}\}\}&on point for url in details.get(passbookUsername).keys and off point for details.get(passbookUsername).size() > 0\\
+5&EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{"https://test.com":\{"aaa":"bbb"\}\}\}&on point for url in details.get(passbookUsername).keys and off point for details.get(passbookUsername).size() > 0\\
 \hline
-6&EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://java.com":\{"aaa":"aaa"\}\}\}&on point for url not in details.get(passbookUsername).keys\\
+6&EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://java.com":\{"aaa":"bbb"\}\}\}&on point for url not in details.get(passbookUsername).keys\\
 \hline
-7&EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"aaa"\}\}\}&on point for url.getProtocol() equals other\\
+7&EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&on point for url.getProtocol() equals other\\
 \hline
 \end{longtable}
 
