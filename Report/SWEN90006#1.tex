@@ -74,7 +74,7 @@ As part of your input domain, the instance variables should also be considered. 
 \subsection{addUser}
 
 \begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for addUser}\\
+\caption{Test cases for addUser associated with equivalence classes}\\
 \hline 
 ID&Test case&Expected output\\
 \hline  
@@ -97,7 +97,7 @@ EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = 
 \subsection{loginUser}
 
 \begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for loginUser}\\
+\caption{Test cases for loginUser associated with equivalence classes}\\
 \hline 
 ID&Test case&Expected output\\
 \hline  
@@ -105,11 +105,11 @@ EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "a
 \hline
 EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&IncorrectPassphraseException\\
 \hline
-EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&-\\
 \hline
-EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{123:"def"\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{123:"def"\} passbookUsername = "abc", paraphrase = "123456aA"&-\\
 \hline
-EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&...\\
+EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&-\\
 \hline
 EC6&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&AlreadyLoggedInException\\
 \hline
@@ -119,7 +119,7 @@ EC7&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbo
 
 \subsection{updateDetails}
 \begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for updateUserDetails}\\
+\caption{Test cases for updateUserDetails associated with equivalence classes}\\
 \hline 
 ID&Test case&Expected output\\
 \hline  
@@ -142,7 +142,7 @@ EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsernam
 \end{longtable}
 \subsection{retrieveDetails}
 \begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for updateUserDetails}\\
+\caption{Test cases for retrieveDetails associated with equivalence classes}\\
 \hline 
 ID&Test case&Expected output\\
 \hline  
@@ -167,7 +167,7 @@ EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = 
 \subsection{addUser}
 
 \begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for addUser}\\
+\caption{Test cases for addUser associated with boundary-value analysis}\\
 \hline 
 Test ID&EC&Test case&Boundary\\
 \hline  
@@ -206,7 +206,7 @@ Test ID&EC&Test case&Boundary\\
 \subsection{loginUser}
 
 \begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for loginUser}\\
+\caption{Test cases for loginUser associated with boundary-value analysis}\\
 \hline 
 Test ID&EC&Test case&Boundary\\
 \hline  
@@ -229,7 +229,7 @@ not euqals passphrase\\
 
 \subsection{updateDetails}
 \begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for updateUserDetails}\\
+\caption{Test cases for updateUserDetails associated with boundary-value analysis}\\
 \hline 
 Test ID&EC&Test case&Boundary\\
 \hline  
@@ -252,7 +252,7 @@ Test ID&EC&Test case&Boundary\\
 \end{longtable}
 \subsection{retrieveDetails}
 \begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
-\caption{Test cases for updateUserDetails}\\
+\caption{Test cases for retrieveDetails associated with boundary-value analysis}\\
 \hline 
 Test ID&EC&Test case&Boundary\\
 \hline  
@@ -279,7 +279,7 @@ Test ID&EC&Test case&Boundary\\
 \subsection{addUser}
 Table 9 shows all test objectives for the API addUser
 \begin{longtable}{|p{2cm}|p{10cm}|p{3cm}|}
-\caption{Multiple-conditions for addUser}\\
+\caption{All multiple-conditions for addUser}\\
 \hline 
 Test Objective ID&Condition&Output(s)\\
 \hline  
@@ -396,9 +396,9 @@ Test Case& CoverTest Objective ID\\
 \end{longtable}
 
 \subsection{loginUser}
-Table 10 shows all test objectives for the API loginUser
+Table 12 shows all test objectives for the API loginUser
 \begin{longtable}{|p{2cm}|p{10cm}|p{3cm}|}
-\caption{Multiple-conditions for loginUser}\\
+\caption{All multiple-conditions for loginUser}\\
 \hline 
 Test Objective ID&Condition&Output(s)\\
 \hline  
@@ -462,9 +462,9 @@ Test Case& CoverTest Objective ID\\
 \hline
 \end{longtable}
 \subsection{updateDetails}
-Table 11 shows all test objectives for the API updateDetails
+Table 15 shows all test objectives for the API updateDetails
 \begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
-\caption{Multiple-conditions for updateDetails}\\
+\caption{All multiple-conditions for updateDetails}\\
 \hline 
 Test Objective ID&Condition&Output(s)\\
 \hline  
@@ -528,9 +528,9 @@ Test Case& CoverTest Objective ID\\
 \hline
 \end{longtable}
 \subsection{retrieveDetails}
-Table 12 shows all test objectives for the API retrieveDetails
+Table 18 shows all test objectives for the API retrieveDetails
 \begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
-\caption{Multiple-conditions for retrieveDetails}\\
+\caption{All multiple-conditions for retrieveDetails}\\
 \hline 
 Test Objective ID&Condition&Output(s)\\
 \hline  
