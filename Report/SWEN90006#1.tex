@@ -40,6 +40,7 @@
 \thispagestyle{fancy}
 
 \section{Task 1}
+%1.1
 \subsection{Test template trees}
 Figure 1 - 4 shows the test template trees for the API addUser, loginUser, updateDetails, and retrieveDetails respectively.
 \begin{figure}[hbt!]        
@@ -70,7 +71,8 @@ If two variables are independent of each other, then the subtree of one variable
 As part of your input domain, the instance variables should also be considered. Note that all of these variables are collections, so according to guideline 4, we should follow the zero-one-many rule. But in this particular case, we just care about whether the collection contains some values. So I combined the two cases (number of elements equals 1 and greater than 1) into one (greater than 0), which does not affect the results of the tests.
 \end{itemize}
 
-\section{Test cases associated with equivalence classes}
+\section{Task 2: Test cases associated with equivalence classes}
+%2.1
 \subsection{addUser}
 
 \begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
@@ -94,6 +96,7 @@ EC7&paraphrases = \{"abcd":"123456aA"\}, passbookUsername = "abc", paraphrase = 
 \hline
 \end{longtable}
 
+%2.2
 \subsection{loginUser}
 
 \begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
@@ -111,8 +114,11 @@ EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{
 \hline
 EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&NoSuchUserException\\
 \hline
+EC6&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&-\\
+\hline
 \end{longtable}
 
+%2.3
 \subsection{updateDetails}
 \begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
 \caption{Test cases for updateUserDetails associated with equivalence classes}\\
@@ -136,6 +142,8 @@ EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsern
 EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "123"&MalformedURLException\\
 \hline
 \end{longtable}
+
+%2.4
 \subsection{retrieveDetails}
 \begin{longtable}{|p{2cm}|p{7cm}|p{5cm}|}
 \caption{Test cases for retrieveDetails associated with equivalence classes}\\
@@ -159,7 +167,8 @@ EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = 
 \end{longtable}
 
 %---------------------------------------------------------------------------------------
-\section{Boundary-value analysis}
+\section{Task 3 Boundary-value analysis}
+%3.1
 \subsection{addUser}
 
 \begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
@@ -199,8 +208,8 @@ Test ID&EC&Test case&Boundary\\
 \hline
 \end{longtable}
 
+%3.2
 \subsection{loginUser}
-
 \begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
 \caption{Test cases for loginUser associated with boundary-value analysis}\\
 \hline 
@@ -208,17 +217,19 @@ Test ID&EC&Test case&Boundary\\
 \hline  
 1&EC1&paraphrases = \{\}, sessionIDs = \{\}, userIDs = \{\}, passbookUsername = "abc", paraphrase = "123456aA"&on point for paraphrases.size() == 0\\
 \hline
-2&EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&on point for passphrases.get (passbookUsername)
-not euqals passphrase\\
+2&EC2&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aB"&on point for passphrases.get (passbookUsername) not equals passphrase and on point for sessionIDs.size() == 0\\
 \hline
 3&EC3&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"def":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername not in sessionIDs.keys() and off point for sessionIDs.size() > 0\\
 \hline
 4&EC4&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{"abc":123\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for passbookUsername in sessionIDs.keys()\\
 \hline
-5&EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername not in passphrases.keys()\\
+5&EC5&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abcd", paraphrase = "123456aA"&on point for passbookUsername not in passphrases.keys() and off point for paraphrases.size() > 0\\
+\hline
+6&EC6&paraphrases = \{"abc":"123456aA"\}, sessionIDs = \{\}, userIDs = \{\} passbookUsername = "abc", paraphrase = "123456aA"&on point for passphrases.get (passbookUsername) equals passphrase\\
 \hline
 \end{longtable}
 
+%3.3
 \subsection{updateDetails}
 \begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
 \caption{Test cases for updateUserDetails associated with boundary-value analysis}\\
@@ -229,7 +240,7 @@ Test ID&EC&Test case&Boundary\\
 \hline
 2&EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", urlUsername = "123", urlPassword = "456"&on point for sessionID not in userIDs.keys() and off point for userIDs.size() > 0\\
 \hline
-3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "456"&on point for url.getProtocol() equals "http"\\
+3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", urlUsername = "123", urlPassword = "456"&on point for url.getProtocol() equals "http" and on point for sessionID in userIDs.keys()\\
 \hline
 4&EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", urlUsername = null, urlPassword = null&on point for urlUsername == null and urlPassword == null and url.getProtocol() equals "https"\\
 \hline
@@ -242,6 +253,8 @@ Test ID&EC&Test case&Boundary\\
 8&EC8&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", urlUsername = "123", urlPassword = "456"&on point for url.getProtocol() equals other\\
 \hline
 \end{longtable}
+
+%3.4
 \subsection{retrieveDetails}
 \begin{longtable}{|p{0.5cm}|p{0.5cm}|p{7cm}|p{5cm}|}
 \caption{Test cases for retrieveDetails associated with boundary-value analysis}\\
@@ -252,22 +265,23 @@ Test ID&EC&Test case&Boundary\\
 \hline
 2&EC2&userIDs = \{123:"abc"\}, sessionID = 456, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&off point for userIDs.size() > 0 and on point for sessionID not in userIDs.keys()\\
 \hline
-3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}& on point for url.getProtocol() equals "http" and sessionID in userIDs.keys()\\
+3&EC3&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}& on point for url.getProtocol() equals "http" and sessionID in userIDs.keys() and on point for sessionID in userIDs.keys()\\
 \hline
-4&EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{\}\}&on point for details.get(passbookUsername).size() == 0 and url.getProtocol() equals "https"\\
+4&EC4&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{\}\}&on point for details.get(passbookUsername) .size() == 0 and url.getProtocol() equals "https"\\
 \hline
 5&EC5&userIDs = \{123:"abc"\}, sessionID = 123, url = "https://test.com", details = \{"abc":\{"https://test.com":\{"aaa":"bbb"\}\}\}&on point for url in details.get(passbookUsername).keys and off point for details.get(passbookUsername).size() > 0\\
 \hline
 6&EC6&userIDs = \{123:"abc"\}, sessionID = 123, url = "http://test.com", details = \{"abc":\{"http://java.com":\{"aaa":"bbb"\}\}\}&on point for url not in details.get(passbookUsername).keys\\
 \hline
-7&EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&on point for url.getProtocol() equals other\\
+7&EC7&userIDs = \{123:"abc"\}, sessionID = 123, url = "ftp://test.com", details = \{"abc":\{"http://test.com":\{"aaa":"bbb"\}\}\}&on point for url.getProtocol() equals other and on point for sessionID in userIDs.keys()\\
 \hline
 \end{longtable}
 
 
 
 %---------------------------------------------------------------------------------------
-\section{Multiple-conditions coverage}
+\section{Task 5 Multiple-conditions coverage}
+%4.1
 \subsection{addUser}
 Table 9 shows all test objectives for the API addUser.
 \begin{longtable}{|p{2cm}|p{10cm}|p{3cm}|}
@@ -328,6 +342,8 @@ Test Objective ID&Condition&Output(s)\\
 26&!containsLowerCase || !containsUpperCase || !containsNumber&true true true\\
 \hline
 \end{longtable}
+
+%4.1.1
 \subsubsection{partitioning score for the API addUser}
 According to table 9 and table 10, there are 26 test objective in total, of which 20 are tested and 6 untested. So the partitioning score for the API addUser of partitioning is:
 $$\frac{20}{26}\approx76.9\%$$
@@ -351,6 +367,8 @@ Test Case& CoverTest Objective ID\\
 7&2 4 5 6 7 9 10 11 12 13 14 15 16 18 19\\
 \hline
 \end{longtable}
+
+%4.1.2
 \subsubsection{boundary score for the API addUser}
 According to table 9 and table 11, there are 26 test objective in total, of which 22 are tested and 4 untested. So the partitioning score for the API addUser of boundary is:
 $$\frac{22}{26}\approx84.6\%$$
@@ -391,6 +409,7 @@ Test Case& CoverTest Objective ID\\
 \hline
 \end{longtable}
 
+%4.2
 \subsection{loginUser}
 Table 12 shows all test objectives for the API loginUser
 \begin{longtable}{|p{2cm}|p{10cm}|p{3cm}|}
@@ -415,6 +434,8 @@ Test Objective ID&Condition&Output(s)\\
 8&userIDs.containsKey(sessionID)&false\\
 \hline
 \end{longtable}
+
+%4.2.1
 \subsubsection{partitioning score for the API loginUser}
 According to table 12 and table 13, there are 8 test objective in total, of which 7 are tested and 1 untested. So the partitioning score for the API loginUser of partitioning is:
 $$\frac{7}{8}\approx87.5\%$$
@@ -433,7 +454,11 @@ Test Case& CoverTest Objective ID\\
 \hline
 5&1\\
 \hline
+6&2 4 6 8\\
+\hline
 \end{longtable}
+
+%4.2.2
 \subsubsection{boundary score for the API loginUser}
 According to table 12 and table 14, there are 8 test objective in total, of which 7 are tested and 1 untested. So the partitioning score for the API loginUser of boundary is:
 $$\frac{7}{8}\approx87.5\%$$
@@ -452,7 +477,11 @@ Test Case& CoverTest Objective ID\\
 \hline
 5&1\\
 \hline
+6&2 4 6 8\\
+\hline
 \end{longtable}
+
+%4.3
 \subsection{updateDetails}
 Table 15 shows all test objectives for the API updateDetails
 \begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
@@ -477,6 +506,8 @@ Test Objective ID&Condition&Output(s)\\
 8&urlUsername == null || urlPassword == null&true true\\
 \hline
 \end{longtable}
+
+%4.3.1
 \subsubsection{partitioning score for the API updateDetails}
 According to table 15 and table 16 there are 8 test objective in total, of which 8 are tested and 0 untested. So the partitioning score for the API updateDetails of partitioning is:
 $$\frac{8}{8}\approx100\%$$
@@ -502,8 +533,9 @@ Test Case& CoverTest Objective ID\\
 8&2 3\\
 \hline
 \end{longtable}
+
+%4.3.2
 \subsubsection{boundary score for the API updateDetails}
-\subsubsection{partitioning score for the API updateDetails}
 According to table 15 and table 17 there are 8 test objective in total, of which 8 are tested and 0 untested. So the partitioning score for the API updateDetails of boundary is:
 $$\frac{8}{8}\approx100\%$$
 \begin{longtable}{|p{2cm}|p{8cm}|}
@@ -528,6 +560,8 @@ Test Case& CoverTest Objective ID\\
 8&2 3\\
 \hline
 \end{longtable}
+
+%4.4
 \subsection{retrieveDetails}
 Table 18 shows all test objectives for the API retrieveDetails
 \begin{longtable}{|p{2cm}|p{11cm}|p{2cm}|}
@@ -552,6 +586,8 @@ Test Objective ID&Condition&Output(s)\\
 8&pair == null&true\\
 \hline
 \end{longtable}
+
+%4.4.1
 \subsubsection{partitioning score for the API retrieveDetails}
 According to table 18 and table 19, there are 8 test objective in total, of which 7 are tested and 1 untested. So the partitioning score for the API retrieveDetails of partitioning is:
 $$\frac{7}{8}\approx87.5\%$$
@@ -575,6 +611,8 @@ Test Case& CoverTest Objective ID\\
 7&2 3\\
 \hline
 \end{longtable}
+
+%4.4.2
 \subsubsection{boundary score for the API retrieveDetails}
 According to table 18 and table 20, there are 8 test objective in total, of which 7 are tested and 1 untested. So the partitioning score for the API retrieveDetails of boundary is:
 $$\frac{7}{8}\approx87.5\%$$
@@ -598,4 +636,6 @@ Test Case& CoverTest Objective ID\\
 7&2 3\\
 \hline
 \end{longtable}
+
+\section{Question 7 Compare the two sets of test cases and their results.}
 \enddocument
