@@ -638,4 +638,23 @@ Test Case& CoverTest Objective ID\\
 \end{longtable}
 
 \section{Question 7 Compare the two sets of test cases and their results.}
+I think in most cases, boundary-value analysis is more effective. The reasons are as follows。
+\begin{itemize}
+\item [1)] 
+Theoretically, the aim of boundary-value analysis is to find better test cases that are more likely to detect errors. In other words, boundary-value analysis is a supplement to equivalence partitioning. So in terms of their nature, the former are more efficient.
+\item [2)]
+From the perspective of the coverage of the valid input/output domain, both methods can well cover the input domain. Of course, the premise is that all equivalence class are divided disjointedly and fully cover the input domain.
+\item [3)]
+In section 4.1, we can see that the multiple-conditions coverage score (addUser) of boundary-value analysis is higher than that of equivalence partitioning. The reason is that the boundaries are related to flow control constructs. Boundary-value analysis can bring more test cases near the boundary, which are more likely to cover more conditions.
+\item [4)]
+There may not be a boundary that makes sense in a equivalence class, this might be the reason why the multiple-conditions coverage score of boundary-value analysis is equal to that of equivalence partitioning in section 4.2, 4.3 and 4.4. In these cases, it is hard or not possible to come up with a better test cases with boundary-value analysis.
+\item [5)]
+As for the mutants killed by the two test suites, the test suite of boundary-value analysis kills more mutants than equivalence partitioning (5 vs. 4). This also confirms the point that the errors are more likely to be at the boundary between equivalence classes[1], which makes boundary-value analysis more effective.
+\end{itemize}
+
+\section*{References}
+
+\begin{enumerate}[label={[\arabic*]}, noitemsep]
+\item The School of Computing and Software Systems, The University of Melbourne, "Software \& Security Testing Course Notes for SWEN90006" unpublished, 2019.
+\end{enumerate}
 \enddocument
